@@ -15,12 +15,12 @@ import Footer from '../components/Footer/Footer.vue';
 import Login from '../views/Login.vue';
 export default {
     name: 'MainApp',
+    
     components: {
         Header,
         Footer,
         Login
     },
-
     computed: {
         isAuth() {
             return false
