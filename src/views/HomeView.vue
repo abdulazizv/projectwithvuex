@@ -1,11 +1,9 @@
-<template>
-  <div>
-    <h1>Home page</h1>
-  </div>
-</template>
-<script>
-export default {
-  name: "HomeView",
-};
+<script setup>
+
 </script>
-<style lang="css"></style>
+
+<template>
+  <main>
+ 
+  </main>
+</template>
