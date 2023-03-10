@@ -42,7 +42,28 @@ const router = createRouter({
             ]
 
 
-        }, {
+        },
+        {
+            path: "/category",
+            component: () => import ('../views/Category.vue'),
+
+            children: [
+                {
+                    path: "/category/add",
+                    name: "addcategory",
+                    component: () => import ('../views/CategoryAdd.vue')
+                },
+                {
+                    path: "/category/list",
+                    name: "categorylist",
+                    component: () => import ('../views/CategoryList.vue')
+                }
+
+            ]
+
+
+        },
+        {
             path: '/:pathMatch(.*)*',
             name: 'erorr',
             component: () => import ('../views/NotFound.vue')
