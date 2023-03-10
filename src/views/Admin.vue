@@ -1,38 +1,24 @@
 <template>
-  <ul class="flex p-5 bg-indigo-50 rounded-sm w-full justify-center">
-    <li>
-      <router-link
-        class="mx-3 block bg-indigo-500 text-white py-2 px-6 rounded-xl"
-        to="/admin/list"
-        >LIST</router-link
-      >
-    </li>
-    <li v-if="getRole == '1,2' || getRole == '1'">
-      <router-link
-        class="mx-3 block bg-indigo-500 text-white py-2 px-6 rounded-xl"
-        to="/admin/add"
-        >ADD</router-link
-      >
-    </li>
-  </ul>
-  <router-view></router-view>
+    <ul class="flex p-5 bg-indigo-50 rounded-sm w-full justify-center">
+        <li>
+            <router-link class="mx-3 block bg-indigo-500 text-white  py-2 px-6 rounded-xl" to="/admin/add">ADD</router-link>
+        </li>
+
+
+        <li>
+            <router-link class="mx-3 block bg-indigo-500 text-white  py-2 px-6 rounded-xl"
+                to="/admin/list">LIST</router-link>
+        </li>
+    </ul>
+    <router-view></router-view>
 </template>
 <script>
 export default {
-  name: "Admin",
-
-  computed: {
-    getRole() {
-      return (
-        window.localStorage.getItem("roles") ||
-        this.$store.state.loginAdmin.role.join(",")
-      );
-    },
-  },
-};
+    name: "Admin"
+}
 </script>
-<style scoped>
+<style lang="css" scoped>
 .router-link-active {
-  background-color: indigo;
+    background-color: indigo;
 }
 </style>

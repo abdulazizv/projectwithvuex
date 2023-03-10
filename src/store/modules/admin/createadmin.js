@@ -1,7 +1,7 @@
 import axios from "@/service/axios.js";
 let token = window.localStorage.getItem('token');
 
-export const createAdmin = {
+export const admin = {
     state: () => (
         {authMessage: ""}
     ),
@@ -36,7 +36,6 @@ export const createAdmin = {
             } catch (err) {
                 console.log(err);
                 commit("SET_MESSAGES", err.response.data.message);
-                return err.response.data;
 
             }
         }

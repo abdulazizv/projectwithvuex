@@ -1,51 +1,57 @@
-import axios from "../../../service/axios";
+import axios from "@/service/axios.js";
 
-const loginAdmin = {
+export const auth = {
   state: () => ({
-    admin: {},
     isAuth: false,
     authMessage: "",
     token: "",
-    role: [],
+    username: "",
+    role: "",
   }),
+
   mutations: {
-    SET_ADMIN(state, data) {
-      state.admin = data;
-      localStorage.setItem("roles", data.roles);
-      localStorage.setItem("username", data.username);
-    },
-    SET_AUTH(state, bool) {
-      state.isAuth = bool;
+    SET_AUTH(state, payload) {
+      state.isAuth = payload;
       window.localStorage.setItem("auth", state.isAuth);
     },
-    SET_MESSAGE(state, message) {
-      state.authMessage = message;
+    SET_USERNAME(state, payload) {
+      state.username = payload;
+      window.localStorage.setItem("username", state.username);
+    },
+    SET_ROLE(state, payload) {
+      state.role = payload;
+      window.localStorage.setItem("role", state.role);
+    },
+
+    SET_MESSAGES(state, payload) {
+      state.authMessage = payload;
     },
     SET_TOKEN(state, token) {
       state.token = token;
       window.localStorage.setItem("token", state.token);
     },
   },
+
   actions: {
-    async LOGIN_ADMIN({ commit }, payload) {
+    LOGIN_USER: async ({ commit }, payload) => {
       try {
-        console.log(payload);
         const response = await axios.post("/admin/login", payload);
-        console.log(response);
-        commit("SET_ADMIN", response.data.admin);
         commit("SET_AUTH", true);
-        commit("SET_TOKEN", response.data.admin.token);
+        commit("SET_TOKEN", response.data.token);
+        commit("SET_MESSAGES", "");
+        commit("SET_USERNAME", response.data.username);
+        commit("SET_ROLE", response.data.role);
 
         return response;
-      } catch (error) {
-        console.log(error);
-        commit("SET_MESSAGE", error.response.data.message);
-        commit("SET_ADMIN", "");
+      } catch (err) {
+        console.log(err);
+
+        commit("SET_MESSAGES", err.response.data.message);
+        commit("SET_TOKEN", "");
         commit("SET_AUTH", false);
-        commit("SET_TOKEN");
+        commit("SET_USERNAME", "");
+        commit("SET_ROLE", "");
       }
     },
   },
 };
-
-export default loginAdmin;
